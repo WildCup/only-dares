@@ -16,7 +16,7 @@ namespace DaresGacha.Controllers
         }
 
 
-        [HttpPatch]
+        [HttpPost]
         public async Task<IActionResult> Add(DareAddDto newDare)
         {
             var response = await _dareService.Add(newDare);
@@ -57,6 +57,17 @@ namespace DaresGacha.Controllers
         {
             newDare.Id = id;
             var response = await _dareService.Update(newDare);
+
+            if (response.Success == true)
+                return Ok();
+            return (BadRequest(response.Exception));
+        }
+
+        [HttpPut("{id}/done")]
+        public async Task<IActionResult> Done(int id, DareDoneDto done)
+        {
+            done.Id = id;
+            var response = await _dareService.Done(done);
 
             if (response.Success == true)
                 return Ok();

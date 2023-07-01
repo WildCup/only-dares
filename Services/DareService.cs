@@ -43,12 +43,25 @@ public class DareService : BaseService<Dare>, IDareService
 
         int i = new Random().Next(0, dares.Count());
         var chosenOne = dares.ToArray()[i];
-        return new ServiceResponse<DareGetRandomDto>() { Data = _mapper.Map<DareGetRandomDto>(chosenOne) };
+        var mapped = _mapper.Map<DareGetRandomDto>(chosenOne);
+        mapped.Difficulty = difficulty;
+        return new ServiceResponse<DareGetRandomDto>() { Data = mapped };
     }
 
     public async Task<ServiceResponse<bool>> Update(DareUpdateDto newDare)
     {
         var dare = _mapper.Map<Dare>(newDare);
+        return await base.Update(dare);
+    }
+
+    public async Task<ServiceResponse<bool>> Done(DareDoneDto done)
+    {
+        var dare = await _repository.Get(done.Id);
+        if (dare == null) return new ServiceResponse<bool>() { Success = false, Exception = $"Dare with id {done.Id} not found" };
+
+        if (done.Done) dare.Done = true;
+        else dare.Skipped++;
+
         return await base.Update(dare);
     }
 

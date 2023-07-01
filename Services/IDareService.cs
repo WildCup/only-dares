@@ -9,4 +9,5 @@ public interface IDareService
     Task<ServiceResponse<IEnumerable<DareGetDto>>> GetAll(int? lvl, bool? done, bool? isDeleted);
     Task<ServiceResponse<DareGetRandomDto>> GetRandom();
     Task<ServiceResponse<bool>> Update(DareUpdateDto newDare);
+    Task<ServiceResponse<bool>> Done(DareDoneDto done);
 }

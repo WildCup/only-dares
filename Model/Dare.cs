@@ -6,5 +6,6 @@ public class Dare : Base
     public int Level { get; set; } = 1; //max 5
     public bool Done { get; set; } = false;
     public int Skipped { get; set; } = 0;
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
+    public bool Plus18 { get; set; } = false;
 }
