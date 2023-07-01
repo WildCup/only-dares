@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using DaresGacha.Dtos;
+using DaresGacha.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace DaresGacha.Controllers
 {
@@ -12,17 +8,59 @@ namespace DaresGacha.Controllers
     [Route("[controller]")]
     public class DareController : ControllerBase
     {
-        private readonly ILogger<DareController> _logger;
+        private readonly IDareService _dareService;
 
-        public DareController(ILogger<DareController> logger)
+        public DareController(IDareService dareService)
         {
-            _logger = logger;
+            _dareService = dareService;
+        }
+
+
+        [HttpPatch]
+        public async Task<IActionResult> Add(DareAddDto newDare)
+        {
+            var response = await _dareService.Add(newDare);
+            if (response.Success == true)
+                return Ok(response.Data);
+            return (BadRequest(response.Exception));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _dareService.Delete(id);
+            if (response.Success == true)
+                return Ok();
+            return (BadRequest(response.Exception));
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAll(int? lvl = null, bool? done = null, bool? isDeleted = null)
         {
-            return Ok("xd lalala");
+            var response = await _dareService.GetAll(lvl, done, isDeleted);
+            if (response.Success == true)
+                return Ok(response.Data);
+            return (BadRequest(response.Exception));
+        }
+
+        [HttpGet("random")]
+        public async Task<IActionResult> GetRandom()
+        {
+            var response = await _dareService.GetRandom();
+            if (response.Success == true)
+                return Ok(response.Data);
+            return (BadRequest(response.Exception));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateLvl(int id, DareUpdateDto newDare)
+        {
+            newDare.Id = id;
+            var response = await _dareService.Update(newDare);
+
+            if (response.Success == true)
+                return Ok();
+            return (BadRequest(response.Exception));
         }
     }
 }
