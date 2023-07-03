@@ -1,4 +1,4 @@
-namespace DaresGacha.Dtos;
+namespace DaresGacha.Dtos.Dare;
 
 public class DareAddDto
 {

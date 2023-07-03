@@ -1,4 +1,4 @@
-using DaresGacha.Dtos;
+using DaresGacha.Dtos.Dare;
 using DaresGacha.Services;
 using Microsoft.AspNetCore.Mvc;
 

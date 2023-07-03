@@ -45,7 +45,7 @@ namespace DaresGacha.Services
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task UpdateAsync(Base entity)
+        public async Task Update(Base entity)
         {
             _context.Set<T>().Update((T)entity);
             await _context.SaveChangesAsync();

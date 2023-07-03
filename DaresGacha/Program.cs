@@ -10,7 +10,8 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(build
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IRepository<Dare>, Repository<Dare>>();
-// builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IRepository<Player>, Repository<Player>>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IDareService, DareService>();
 
 

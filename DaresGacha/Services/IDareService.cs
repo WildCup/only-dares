@@ -1,4 +1,4 @@
-using DaresGacha.Dtos;
+using DaresGacha.Dtos.Dare;
 
 namespace DaresGacha.Services;
 

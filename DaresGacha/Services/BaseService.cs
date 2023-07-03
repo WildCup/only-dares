@@ -2,7 +2,7 @@ using AutoMapper;
 
 namespace DaresGacha.Services
 {
-    public abstract class BaseService<T> where T : Dare
+    public abstract class BaseService<T> where T : Base
     {
         protected readonly IRepository<T> _repository;
         protected readonly IMapper _mapper;
@@ -14,7 +14,7 @@ namespace DaresGacha.Services
         }
 
 
-        public async Task<ServiceResponse<int>> Add(Base entity)
+        public virtual async Task<ServiceResponse<int>> Add(Base entity)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace DaresGacha.Services
             }
         }
 
-        public async Task<ServiceResponse<bool>> Delete(int id)
+        public virtual async Task<ServiceResponse<bool>> Delete(int id)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace DaresGacha.Services
             }
         }
 
-        public async Task<ServiceResponse<T>> Get(int id)
+        public virtual async Task<ServiceResponse<T>> Get(int id)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace DaresGacha.Services
             }
         }
 
-        public async Task<ServiceResponse<IEnumerable<T>>> GetAll()
+        public virtual async Task<ServiceResponse<IEnumerable<T>>> GetAll()
         {
             try
             {
@@ -82,11 +82,11 @@ namespace DaresGacha.Services
             }
         }
 
-        public async Task<ServiceResponse<bool>> Update(T entity)
+        public virtual async Task<ServiceResponse<bool>> Update(T entity)
         {
             try
             {
-                var id = await _repository.Add(entity);
+                await _repository.Update(entity);
                 return new ServiceResponse<bool>();
             }
             catch (Exception e)

@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using DaresGacha.Dtos;
+using DaresGacha.Dtos.Dare;
+using DaresGacha.Dtos.Player;
 
 namespace DaresGacha
 {
@@ -11,11 +8,15 @@ namespace DaresGacha
     {
         public MapperProfile()
         {
-            CreateMap<Dare, DareGetDto>().ReverseMap();
             CreateMap<Dare, DareAddDto>().ReverseMap();
-            CreateMap<Dare, DareUpdateDto>().ReverseMap();
+            CreateMap<Dare, DareDoneDto>().ReverseMap();
+            CreateMap<Dare, DareGetDto>().ReverseMap();
             CreateMap<Dare, DareGetRandomDto>().ReverseMap();
+            CreateMap<Dare, DareUpdateDto>().ReverseMap();
 
+            CreateMap<Player, PlayerAddDto>().ReverseMap();
+            CreateMap<Player, PlayerGetDto>().ReverseMap();
+            CreateMap<Player, PlayerUpdateDto>().ReverseMap();
         }
     }
 }

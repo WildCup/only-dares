@@ -1,8 +1,5 @@
 using AutoMapper;
-using DaresGacha.Data;
-using DaresGacha.Dtos;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using DaresGacha.Dtos.Dare;
 
 namespace DaresGacha.Services;
 

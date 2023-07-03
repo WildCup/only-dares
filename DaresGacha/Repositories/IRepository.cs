@@ -10,5 +10,5 @@ public interface IRepository<T> where T : Base
 
     Task<IEnumerable<T>> GetAll();
 
-    Task UpdateAsync(Base entity);
+    Task Update(Base entity);
 }
